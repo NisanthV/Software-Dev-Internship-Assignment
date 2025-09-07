@@ -1,5 +1,15 @@
 from pymongo import MongoClient
 
-client = MongoClient("mongodb://localhost:27017/")
-db = client.get_database("Youtube")
-youtube_id = db.get_collection("youtube_id")
+
+URI = "mongodb+srv://nisanthv:eT5mPBCVc5jI3ctx@cluster0.tivpbg6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+client = MongoClient(URI)
+
+try:
+    client.admin.command("ping")          # ↩︎ confirms the link
+    print("✅  Successfully connected to MongoDB Atlas")
+except Exception as exc:
+    print("❌  Connection failed:", exc)
+
+db          = client["Youtube"]
+youtube_id  = db["youtube_id"]
